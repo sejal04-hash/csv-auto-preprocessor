@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Auto CSV Preprocessor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header>
+            <div>
+                <h1>Auto CSV Preprocessor</h1>
+                <p>Analyze, clean and prepare your dataset for Machine Learning</p>
+            </div>
+
+            <div class="status">
+                <span class="dot"></span>
+                API Online
+            </div>
+        </header>
+
+
+        <!-- Upload Section -->
+        <section class="card upload-card">
+
+            <h2>Upload Dataset</h2>
+            <p class="subtitle">
+                Upload a CSV file to analyze your dataset.
+            </p>
+
+            <div class="upload-box">
+
+                <div class="upload-icon">↑</div>
+
+                <h3>Select CSV File</h3>
+
+                <p>Only .csv files are supported</p>
+
+                <input
+                    type="file"
+                    id="csvFile"
+                    accept=".csv"
+                    hidden
+                >
+
+                <button
+                    class="secondary-btn"
+                    onclick="document.getElementById('csvFile').click()"
+                >
+                    Choose File
+                </button>
+
+                <p id="fileName" class="file-name">
+                    No file selected
+                </p>
+
+            </div>
+
+            <button
+                id="analyzeBtn"
+                class="primary-btn"
+                onclick="uploadCSV()"
+            >
+                Analyze Dataset
+            </button>
+
+        </section>
+
+
+        <!-- Dataset Overview -->
+        <section
+            id="analysisSection"
+            class="hidden"
+        >
+
+            <div class="section-title">
+                <div>
+                    <h2>Dataset Overview</h2>
+                    <p>Automatically detected dataset information</p>
+                </div>
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <span>Rows</span>
+                    <strong id="rows">-</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Columns</span>
+                    <strong id="columns">-</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Missing Values</span>
+                    <strong id="missing">-</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Duplicates</span>
+                    <strong id="duplicates">-</strong>
+                </div>
+
+            </div>
+
+
+            <!-- Health -->
+            <div class="card health-card">
+
+                <div>
+                    <h3>Dataset Health</h3>
+                    <p>Overall data quality score</p>
+                </div>
+
+                <div class="health-score">
+                    <strong id="healthScore">-</strong>
+                    <span>/ 100</span>
+                </div>
+
+            </div>
+
+
+            <!-- Columns -->
+            <div class="card">
+
+                <h3>Detected Columns</h3>
+
+                <div id="columnsList" class="columns-list"></div>
+
+            </div>
+
+
+            <!-- Missing Values by Column -->
+            <div class="card">
+
+                <div class="card-heading-row">
+                    <div>
+                        <h3>Missing Values by Column</h3>
+                        <p class="section-description">
+                            Detailed missing-value information for each affected column.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="missing-table-wrapper">
+
+                    <table class="missing-table">
+
+                        <thead>
+                            <tr>
+                                <th>Column</th>
+                                <th>Data Type</th>
+                                <th>Missing Values</th>
+                                <th>Missing %</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="missingTableBody"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Preprocessing -->
+        <section
+            id="preprocessSection"
+            class="card hidden"
+        >
+
+            <h2>Preprocessing Configuration</h2>
+
+            <p class="subtitle">
+                Select how you want to prepare your dataset.
+            </p>
+
+
+            <div class="form-grid">
+
+                <!-- Target -->
+                <div class="form-group">
+
+                    <label>Target Column</label>
+
+                    <select id="targetColumn">
+                        <option value="">Select target column</option>
+                    </select>
+
+                </div>
+
+
+                <!-- Missing -->
+                <div class="form-group">
+
+                    <label>Missing Values</label>
+
+                    <select id="missingStrategy">
+
+                        <option value="none">None</option>
+                        <option value="drop">Drop Rows</option>
+                        <option value="mean">Mean</option>
+                        <option value="median">Median</option>
+                        <option value="mode">Mode</option>
+                        <option value="constant">Constant</option>
+                        <option value="auto">Auto</option>
+                        <option value="custom">Custom — Per Column</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Duplicates -->
+                <div class="form-group">
+
+                    <label>Duplicates</label>
+
+                    <select id="duplicatesStrategy">
+
+                        <option value="false">
+                            Keep Duplicates
+                        </option>
+
+                        <option value="true">
+                            Remove Duplicates
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Outlier -->
+                <div class="form-group">
+
+                    <label>Outlier Method</label>
+
+                    <select id="outlierMethod">
+
+                        <option value="none">None</option>
+
+                        <option value="iqr">
+                            IQR
+                        </option>
+
+                        <option value="zscore">
+                            Z-Score
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Outlier Action -->
+                <div class="form-group">
+
+                    <label>Outlier Action</label>
+
+                    <select id="outlierAction">
+
+                        <option value="remove">
+                            Remove
+                        </option>
+
+                        <option value="cap">
+                            Cap
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Encoding -->
+                <div class="form-group">
+
+                    <label>Encoding</label>
+
+                    <select id="encoding">
+
+                        <option value="none">
+                            None
+                        </option>
+
+                        <option value="one_hot">
+                            One Hot Encoding
+                        </option>
+
+                        <option value="label">
+                            Label Encoding
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Scaling -->
+                <div class="form-group">
+
+                    <label>Scaling</label>
+
+                    <select id="scaling">
+
+                        <option value="none">
+                            None
+                        </option>
+
+                        <option value="standard">
+                            StandardScaler
+                        </option>
+
+                        <option value="minmax">
+                            MinMaxScaler
+                        </option>
+
+                        <option value="robust">
+                            RobustScaler
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Test Size -->
+                <div class="form-group">
+
+                    <label>Test Size</label>
+
+                    <input
+                        type="number"
+                        id="testSize"
+                        value="0.2"
+                        min="0.1"
+                        max="0.5"
+                        step="0.05"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Column-wise Missing Value Configuration -->
+            <div
+                id="columnMissingConfig"
+                class="column-missing-config hidden"
+            >
+
+                <div class="column-config-header">
+                    <div>
+                        <h3>Column-wise Missing Value Handling</h3>
+                        <p>
+                            Choose a different strategy for each column that contains missing values.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="missingColumnControls"></div>
+
+            </div>
+
+
+            <button
+                class="primary-btn preprocess-btn"
+                onclick="preprocessDataset()"
+            >
+                Preprocess Dataset
+            </button>
+
+        </section>
+
+
+        <!-- Results -->
+        <section
+            id="resultsSection"
+            class="hidden"
+        >
+
+            <div class="card">
+
+                <h2>Preprocessing Results</h2>
+
+                <div class="result-grid">
+
+                    <div class="result-box">
+                        <span>Rows Before</span>
+                        <strong id="rowsBefore">-</strong>
+                    </div>
+
+                    <div class="result-box">
+                        <span>Rows After</span>
+                        <strong id="rowsAfter">-</strong>
+                    </div>
+
+                    <div class="result-box">
+                        <span>Columns Before</span>
+                        <strong id="columnsBefore">-</strong>
+                    </div>
+
+                    <div class="result-box">
+                        <span>Columns After</span>
+                        <strong id="columnsAfter">-</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Operations -->
+            <div class="card">
+
+                <h3>Applied Operations</h3>
+
+                <div id="operationsList">
+                    No operations
+                </div>
+
+            </div>
+
+
+            <!-- Downloads -->
+            <div class="card download-card">
+
+                <h3>Download Dataset</h3>
+
+                <p>
+                    Your processed datasets are ready.
+                </p>
+
+                <div class="download-buttons">
+
+                    <button
+                        class="download-btn"
+                        onclick="downloadProcessed()"
+                    >
+                        Download Processed
+                    </button>
+
+                    <button
+                        class="download-btn"
+                        onclick="downloadTrain()"
+                    >
+                        Download Train
+                    </button>
+
+                    <button
+                        class="download-btn"
+                        onclick="downloadTest()"
+                    >
+                        Download Test
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Loading -->
+        <div
+            id="loading"
+            class="loading hidden"
+        >
+            <div class="spinner"></div>
+            <p>Processing your dataset...</p>
+        </div>
+
+
+        <!-- Error -->
+        <div
+            id="error"
+            class="error hidden"
+        ></div>
+
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

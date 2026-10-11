@@ -1,0 +1,547 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+
+/* Header */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+header p {
+    color: #6b7280;
+}
+
+.status {
+    background: white;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    margin-right: 7px;
+}
+
+
+/* Card */
+
+.card {
+    background: white;
+    padding: 28px;
+    border-radius: 14px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.card h2 {
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #6b7280;
+    margin-bottom: 25px;
+}
+
+
+/* Upload */
+
+.upload-card {
+    text-align: center;
+}
+
+.upload-box {
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+    padding: 45px 20px;
+    margin-bottom: 20px;
+}
+
+.upload-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.upload-box h3 {
+    margin-bottom: 8px;
+}
+
+.upload-box p {
+    color: #6b7280;
+}
+
+.file-name {
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+
+/* Buttons */
+
+button {
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 8px;
+    padding: 12px 22px;
+}
+
+.primary-btn {
+    width: 100%;
+    background: #111827;
+    color: white;
+}
+
+.primary-btn:hover {
+    background: #374151;
+}
+
+.secondary-btn {
+    background: #eef2ff;
+    color: #374151;
+    margin-top: 15px;
+}
+
+.download-btn {
+    background: #111827;
+    color: white;
+}
+
+.download-btn:hover {
+    background: #374151;
+}
+
+
+/* Statistics */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.stat-card span {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.stat-card strong {
+    display: block;
+    font-size: 27px;
+    margin-top: 8px;
+}
+
+
+/* Health */
+
+.health-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.health-card p {
+    color: #6b7280;
+    margin-top: 5px;
+}
+
+.health-score {
+    font-size: 20px;
+}
+
+.health-score strong {
+    font-size: 40px;
+}
+
+
+/* Columns */
+
+.columns-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.column-tag {
+    background: #f3f4f6;
+    padding: 8px 12px;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+
+/* Form */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-group select,
+.form-group input {
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+}
+
+.preprocess-btn {
+    margin-top: 25px;
+}
+
+
+/* Results */
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.result-box {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.result-box span {
+    display: block;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.result-box strong {
+    font-size: 24px;
+    display: block;
+    margin-top: 8px;
+}
+
+
+/* Operations */
+
+.operation {
+    padding: 12px;
+    background: #f9fafb;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+
+/* Downloads */
+
+.download-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.download-card p {
+    color: #6b7280;
+    margin-top: 5px;
+}
+
+
+/* Loading */
+
+.loading {
+    text-align: center;
+    padding: 30px;
+}
+
+.spinner {
+    width: 35px;
+    height: 35px;
+    border: 4px solid #ddd;
+    border-top: 4px solid #111827;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Error */
+
+.error {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+
+/* Utility */
+
+.hidden {
+    display: none;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .stats-grid,
+    .result-grid,
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .download-buttons {
+        flex-direction: column;
+    }
+
+}
+
+/* =========================================
+   Missing Values Details
+   ========================================= */
+
+.card-heading-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-description {
+    margin-top: 6px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.missing-table-wrapper {
+    overflow-x: auto;
+    margin-top: 18px;
+}
+
+.missing-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.missing-table th,
+.missing-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.missing-table th {
+    background: #f9fafb;
+    color: #4b5563;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.missing-table td {
+    font-size: 14px;
+}
+
+.missing-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.type-badge {
+    display: inline-block;
+    background: #f3f4f6;
+    color: #4b5563;
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.no-missing {
+    text-align: center;
+    color: #6b7280;
+    padding: 20px;
+}
+
+
+/* =========================================
+   Column-wise Missing Value Configuration
+   ========================================= */
+
+.column-missing-config {
+    margin-top: 25px;
+    padding: 22px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.column-config-header {
+    margin-bottom: 16px;
+}
+
+.column-config-header h3 {
+    margin-bottom: 6px;
+}
+
+.column-config-header p {
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.missing-column-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 16px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    margin-top: 10px;
+}
+
+.missing-column-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.missing-column-info strong {
+    font-size: 15px;
+}
+
+.missing-column-info span {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.column-missing-select {
+    min-width: 170px;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    color: #1f2937;
+}
+
+
+/* =========================================
+   Professional Operation Cards
+   ========================================= */
+
+.operation {
+    padding: 16px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    margin-top: 10px;
+}
+
+.operation-title {
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 11px;
+}
+
+.operation-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.operation-details span {
+    line-height: 1.5;
+}
+
+.operation-wide {
+    flex-basis: 100%;
+}
+
+
+/* =========================================
+   Responsive additions
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    .missing-column-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .column-missing-select {
+        width: 100%;
+    }
+
+    .missing-table {
+        min-width: 500px;
+    }
+
+    .operation-details {
+        flex-direction: column;
+        gap: 7px;
+    }
+
+}
